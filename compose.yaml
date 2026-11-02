@@ -1,0 +1,13 @@
+# Opcional, para instalarlo en un servidor Docker propio. No requerido por Streamlit Cloud.
+services:
+  unfv:
+    build: .
+    ports:
+      - "8501:8501"
+    volumes:
+      # Crear secrets.toml PRIVADO antes de ejecutar Docker Compose.
+      - ./.streamlit/secrets.toml:/app/.streamlit/secrets.toml:ro
+      - unfv_data:/app/data
+    restart: unless-stopped
+volumes:
+  unfv_data:
